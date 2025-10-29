@@ -20,6 +20,48 @@
         {{errorNombre.mensaje}}
       </div>
     </div>
+    <!-- Campo documento -->
+    <div class="form-group">
+      <label for="documento">documento</label>
+      <input
+        type="text"
+        id="documento"
+        class="form-control"
+        placeholder="Documento"
+        v-model.trim="formulario.documento"
+      />
+      <div v-if="errorDocumento.mostrar" class="alert alert-danger mt-2">
+        {{errorDocumento.mensaje}}
+      </div>
+    </div>
+    <!-- Campo Monto a pagar -->
+    <div class="form-group">
+      <label for="deuda">deuda</label>
+      <input
+        type="text"
+        id="deuda"
+        class="form-control"
+        placeholder="Deuda"
+        v-model.trim="formulario.deuda"
+      />
+      <div v-if="errorDeuda.mostrar" class="alert alert-danger mt-2">
+        {{errorDeuda.mensaje}}
+      </div>
+    </div>
+    <!-- Campo Monto pago -->
+    <div class="form-group">
+      <label for="pago">pago</label>
+      <input
+        type="text"
+        id="pago"
+        class="form-control"
+        placeholder="Pago"
+        v-model.trim="formulario.pago"
+      />
+      <div v-if="errorPago.mostrar" class="alert alert-danger mt-2">
+        {{errorPago.mensaje}}
+      </div>
+    </div>
 
        <button type="submit" class="btn btn-success my-3" :disabled="estadoBotonDesabilitado()">Enviar</button>
    
@@ -31,20 +73,23 @@
         <thead>
           <tr>
             <th>Nombre</th>
+            <th>Documento</th>
+            <th>Deuda</th>
+            <th>Pago</th>
             <th>Fecha y hora de envío</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(cliente, index) in clientes" :key="index">
             <td>{{ cliente.nombre }}</td>
+            <td>{{ cliente.documento }}</td>
+            <td>{{ cliente.deuda }}</td>
+            <td>{{ cliente.pago }}</td>
             <td>{{ cliente.horaIngresoInformacion }}</td>
           </tr>
         </tbody>
       </table>
     </div>
-
-      
-
   </section>
 </template>
 
@@ -60,6 +105,9 @@ export default {
     return {
       formulario:{
         nombre: '',
+        documento: '',
+        deuda: '',
+        pago: '',
         horaIngresoInformacion: ''
       },
       clientes: [
@@ -89,6 +137,64 @@ export default {
         ok: mensaje == '',
       }
     },
+    errorDocumento() {
+      let mensaje = '';
+      const doc = this.formulario.documento
+      if (!this.formulario.documento) {
+        mensaje = 'El documento es obligatorio.';
+      } else if (!/^\d+$/.test(doc)) {
+        mensaje = 'El documento debe contener solo números.';
+      } else if (doc.length > 8) {
+        mensaje = 'Muchos digitos.';
+      } else if (doc.length < 7){
+        mensaje = 'Faltan digitos.'
+      }
+
+
+      return{
+        mensaje: mensaje,
+        mostrar: mensaje != '',
+        ok: mensaje == '',
+      }
+    },
+    errorDeuda() {
+      let mensaje = '';
+      const deuda = this.formulario.deuda;
+
+  if (!deuda && deuda !== 0) {
+    mensaje = 'El monto de la deuda es obligatorio.';
+  } else if (isNaN(deuda)) {
+    mensaje = 'El monto debe ser un número válido.';
+  } else if (Number(deuda) <= 0) {
+    mensaje = 'El monto debe ser mayor a cero.';
+  }
+
+  return {
+    mensaje: mensaje,
+    mostrar: mensaje != '',
+    ok: mensaje == '',
+
+      }
+    },
+    errorPago() {
+      let mensaje = '';
+      const pago = this.formulario.pago;
+
+  if (!pago && pago !== 0) {
+    mensaje = 'El monto del pago es obligatorio.';
+  } else if (isNaN(pago)) {
+    mensaje = 'El monto debe ser un número válido.';
+  } else if (Number(pago) <= 0) {
+    mensaje = 'El monto debe ser mayor a cero.';
+  }
+
+  return {
+    mensaje: mensaje,
+    mostrar: mensaje != '',
+    ok: mensaje == '',
+
+      }
+    },
   },
 
   watch: {
@@ -102,6 +208,9 @@ export default {
 
       this.clientes.push({
         nombre : this.formulario.nombre,
+        documento : this.formulario.documento,
+        deuda : this.formulario.deuda,
+        pago : this.formulario.pago,
         horaIngresoInformacion : hora
       })
 
@@ -120,6 +229,9 @@ export default {
 
     resetearFormulario(){
       this.formulario.nombre = '',
+      this.formulario.documento = '',
+      this.formulario.deuda = '',
+      this.formulario.pago = '',
       this.horaIngresoInformacion = ''
     }
 
