@@ -77,6 +77,7 @@
             <th>Deuda</th>
             <th>Pago</th>
             <th>Fecha y hora de envío</th>
+            <th>Resultado</th>
           </tr>
         </thead>
         <tbody>
@@ -86,6 +87,7 @@
             <td>{{ cliente.deuda }}</td>
             <td>{{ cliente.pago }}</td>
             <td>{{ cliente.horaIngresoInformacion }}</td>
+            <td>{{ cliente.resultado }}</td>
           </tr>
         </tbody>
       </table>
@@ -108,6 +110,7 @@ export default {
         documento: '',
         deuda: '',
         pago: '',
+        resultado:'',
         horaIngresoInformacion: ''
       },
       clientes: [
@@ -195,6 +198,7 @@ export default {
 
       }
     },
+
   },
 
   watch: {
@@ -211,6 +215,7 @@ export default {
         documento : this.formulario.documento,
         deuda : this.formulario.deuda,
         pago : this.formulario.pago,
+        resultado : this.resultado(),
         horaIngresoInformacion : hora
       })
 
@@ -227,11 +232,20 @@ export default {
       return !this.errorNombre.ok
     },
 
+    resultado() {
+    const deuda = Number(this.formulario.deuda);
+    const pago = Number(this.formulario.pago);
+
+    if (isNaN(deuda) || isNaN(pago)) return '';
+    return deuda - pago;
+    },
+
     resetearFormulario(){
       this.formulario.nombre = '',
       this.formulario.documento = '',
       this.formulario.deuda = '',
       this.formulario.pago = '',
+      this.formulario.resultado = '',
       this.horaIngresoInformacion = ''
     }
 
