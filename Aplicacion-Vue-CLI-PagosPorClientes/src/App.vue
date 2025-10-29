@@ -1,17 +1,33 @@
 
 <template>
-  <header>
-    
-  </header>
-
-  <main>
-    
-  </main>
+  <div class="container-fluid mt-3">
+    <div class="card">
+      <div class="card-header">
+        <header>
+          <h2>Pagos por cliente</h2>
+        </header>
+      </div>
+      <div class="card-body">
+        <main>
+           <Formulario/>
+        </main>
+      </div>
+    </div>
+  </div>
 </template>
 
 
 <script >
 
+import Formulario from './components/components/Formulario.vue';
+
+
+export default {
+  name: 'App',
+  components: {
+    Formulario,
+  },
+};
 </script>
 
 <style scoped>
