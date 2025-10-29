@@ -87,7 +87,7 @@
             <td>{{ cliente.deuda }}</td>
             <td>{{ cliente.pago }}</td>
             <td>{{ cliente.horaIngresoInformacion }}</td>
-            <td>{{ cliente.resultado }}</td>
+            <td :class="colorFila(cliente)">{{ cliente.resultado }}</td>
           </tr>
         </tbody>
       </table>
@@ -247,7 +247,16 @@ export default {
       this.formulario.pago = '',
       this.formulario.resultado = '',
       this.horaIngresoInformacion = ''
-    }
+    },
+    colorFila(cliente) {
+  const deuda = Number(cliente.deuda);
+  const pago = Number(cliente.pago);
+
+  if (isNaN(deuda) || isNaN(pago)) return '';
+  if (pago === deuda) return 'fila-verde';
+  if (pago < deuda) return 'fila-roja';
+  if (pago > deuda) return 'fila-azul';
+}
 
   },
 
@@ -271,6 +280,17 @@ export default {
 }
 .table {
   background-color: #fff;
+}
+.fila-verde {
+  background-color: #d4edda; 
+}
+
+.fila-roja {
+  background-color: #f8d7da; 
+}
+
+.fila-azul {
+  background-color: #d1ecf1; 
 }
 
 </style>
