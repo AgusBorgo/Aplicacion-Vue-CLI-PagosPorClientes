@@ -9,8 +9,10 @@
       </div>
       <div class="card-body">
         <main>
-           <Formulario/>
-           <MultipleChoice/>
+            <NavBar />
+            <RouterView/>
+           <!-- <Formulario/>
+           <MultipleChoice/> -->
         </main>
       </div>
     </div>
@@ -22,6 +24,7 @@
 
 import Formulario from './components/components/Formulario.vue';
 import MultipleChoice from './components/components/MultipleChoice.vue';
+import NavBar from './components/components/NavBar.vue';
 
 
 export default {
@@ -29,6 +32,7 @@ export default {
   components: {
     Formulario,
     MultipleChoice,
+    NavBar
   },
 };
 </script>
