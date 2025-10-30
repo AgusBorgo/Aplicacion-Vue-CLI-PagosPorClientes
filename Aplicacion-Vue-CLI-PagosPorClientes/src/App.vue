@@ -10,6 +10,7 @@
       <div class="card-body">
         <main>
            <Formulario/>
+           <MultipleChoice/>
         </main>
       </div>
     </div>
@@ -20,12 +21,14 @@
 <script >
 
 import Formulario from './components/components/Formulario.vue';
+import MultipleChoice from './components/components/MultipleChoice.vue';
 
 
 export default {
   name: 'App',
   components: {
     Formulario,
+    MultipleChoice,
   },
 };
 </script>

@@ -7,15 +7,13 @@
           <th>#</th>
           <th>Pregunta</th>
           <th>Respuesta elegida</th>
-          <th>Resultado</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(respuesta, index) in respuestas" :key="index" :class="colorFila(respuesta)">
+        <tr v-for="(respuesta, index) in respuestas" :key="index">
           <td>{{ index + 1 }}</td>
           <td>{{ respuesta.pregunta }}</td>
           <td>{{ respuesta.elegida }}</td>
-          <td>{{ respuesta.elegida === respuesta.correcta ? '✅ Correcta' : '❌ Incorrecta' }}</td>
         </tr>
       </tbody>
     </table>
@@ -27,26 +25,20 @@ import { ref } from 'vue'
 
 const respuestas = ref([
   {
-    pregunta: '¿Cuál es la capital de Francia?',
-    elegida: 'París',
+    pregunta: '¿Qué es un componente en Vue.js?',
+    elegida: 'a) Son elementos personalizados reutilizables',
   },
   {
-    pregunta: '¿Cuántos planetas hay en el sistema solar?',
-    elegida: '8',
+    pregunta: '¿Que función cumple el modificador number aplicado a v-model?',
+    elegida: 'c) Modifica el dato de entrada para guardarlo como número en la propiedad vinculada',
   },
   {
-    pregunta: '¿Quién escribió “Cien años de soledad”?',
-    elegida: 'Mario Vargas Llosa',
-  },
-  {
-    pregunta: '¿Qué lenguaje se usa en Vue?',
-    elegida: 'JavaScript',
+    pregunta: 'vue create se utiliza para:',
+    elegida: 'b) Crear un proyecto base Vue basado en Vue CLI',
   }
 ])
 
-function colorFila(respuesta) {
-  return respuesta.elegida === respuesta.correcta ? 'fila-correcta' : 'fila-incorrecta'
-}
+
 </script>
 
 <style scoped>
@@ -58,12 +50,5 @@ function colorFila(respuesta) {
 .table {
   background-color: #fff;
 }
-.fila-correcta {
-  background-color: #d4edda;
-  color: #155724;
-}
-.fila-incorrecta {
-  background-color: #f8d7da;
-  color: #721c24;
-}
+
 </style>
