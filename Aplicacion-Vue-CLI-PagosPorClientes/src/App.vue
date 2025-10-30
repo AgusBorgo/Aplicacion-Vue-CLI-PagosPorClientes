@@ -22,16 +22,12 @@
 
 <script >
 
-import Formulario from './components/components/Formulario.vue';
-import MultipleChoice from './components/components/MultipleChoice.vue';
 import NavBar from './components/components/NavBar.vue';
 
 
 export default {
   name: 'App',
   components: {
-    Formulario,
-    MultipleChoice,
     NavBar
   },
 };
